@@ -19,7 +19,22 @@ const api = axios.create({
 
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem("plantify_token");
+        let token =
+            localStorage.getItem("plantify_token") ||
+            localStorage.getItem("token");
+
+        if (!token) {
+            try {
+                const session = JSON.parse(
+                    localStorage.getItem("plantify_session") || "null"
+                );
+
+                token = session?.access_token ||
+                    session?.session?.access_token;
+            } catch {
+                token = null;
+            }
+        }
 
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
@@ -27,9 +42,7 @@ api.interceptors.request.use(
 
         return config;
     },
-    (error) => {
-        return Promise.reject(error);
-    }
+    (error) => Promise.reject(error)
 );
 
 export default api;
