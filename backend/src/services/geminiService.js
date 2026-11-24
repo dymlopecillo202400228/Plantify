@@ -5,9 +5,6 @@ dotenv.config();
 const BASE_URL =
     "https://generativelanguage.googleapis.com/v1beta";
 
-const sleep = (ms) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-
 export async function generateGeminiResponse(prompt) {
     const apiKey = process.env.GEMINI_API_KEY?.trim();
 
@@ -16,122 +13,90 @@ export async function generateGeminiResponse(prompt) {
     }
 
     const models = [
-        process.env.GEMINI_MODEL,
-        process.env.GEMINI_FALLBACK_MODEL
-    ]
-        .filter(Boolean)
-        .map((model) =>
-            model.trim().replace(/^models\//, "")
-        )
-        .filter(Boolean);
-
-    const uniqueModels = [...new Set(models)];
-
-    if (uniqueModels.length === 0) {
-        throw new Error("No Gemini model is configured.");
-    }
+        process.env.GEMINI_MODEL?.trim() || "gemini-2.5-flash",
+        process.env.GEMINI_FALLBACK_MODEL?.trim() || "gemini-2.5-flash-lite"
+    ];
 
     let lastError;
 
-    for (const model of uniqueModels) {
-        for (let attempt = 0; attempt < 2; attempt++) {
-            try {
-                console.log("REQUESTING GEMINI:", model);
-                console.log("ATTEMPT:", attempt + 1);
+    for (const configuredModel of [...new Set(models)]) {
+        const model = configuredModel.replace(/^models\//, "");
 
-                const response = await fetch(
-                    `${BASE_URL}/models/${model}:generateContent`,
-                    {
-                        method: "POST",
+        try {
+            console.log("REQUESTING GEMINI:", model);
 
-                        headers: {
-                            "Content-Type": "application/json",
-                            "x-goog-api-key": apiKey
-                        },
-
-                        body: JSON.stringify({
-                            contents: [
-                                {
-                                    role: "user",
-                                    parts: [
-                                        {
-                                            text: prompt
-                                        }
-                                    ]
-                                }
-                            ],
-
-                            generationConfig: {
-                                temperature: 0.5,
-                                maxOutputTokens: 2048
+            const response = await fetch(
+                `${BASE_URL}/models/${model}:generateContent`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-goog-api-key": apiKey
+                    },
+                    body: JSON.stringify({
+                        contents: [
+                            {
+                                role: "user",
+                                parts: [
+                                    {
+                                        text: prompt
+                                    }
+                                ]
                             }
-                        }),
+                        ],
+                        generationConfig: {
+                            temperature: 0.5,
+                            maxOutputTokens: 2048
+                        }
+                    }),
+                    signal: AbortSignal.timeout(20000)
+                }
+            );
 
-                        signal: AbortSignal.timeout(30000)
-                    }
+            const data = await response.json();
+
+            if (!response.ok) {
+                const error = new Error(
+                    data.error?.message ||
+                    "Gemini request failed."
                 );
 
-                const data = await response.json();
+                error.status = response.status;
 
-                if (!response.ok) {
-                    const error = new Error(
-                        data.error?.message ||
-                        "Gemini request failed."
-                    );
+                throw error;
+            }
 
-                    error.status = response.status;
+            const reply = data.candidates?.[0]
+                ?.content?.parts
+                ?.filter((part) => !part.thought)
+                ?.map((part) => part.text || "")
+                ?.join("")
+                ?.trim();
 
-                    throw error;
-                }
+            if (!reply) {
+                throw new Error("Gemini returned an empty response.");
+            }
 
-                const reply = data.candidates?.[0]
-                    ?.content?.parts
-                    ?.filter((part) => !part.thought)
-                    ?.map((part) => part.text || "")
-                    ?.join("")
-                    ?.trim();
+            console.log("GEMINI SUCCESS:", model);
 
-                if (!reply) {
-                    throw new Error(
-                        "Gemini returned an empty response."
-                    );
-                }
+            return reply;
 
-                console.log("GEMINI SUCCESS:", model);
+        } catch (error) {
+            lastError = error;
 
-                return reply;
+            console.error("GEMINI ERROR:", {
+                model,
+                status: error.status,
+                message: error.message
+            });
 
-            } catch (error) {
-                lastError = error;
-
-                console.error("GEMINI ERROR:", {
-                    model,
-                    status: error.status,
-                    message: error.message
-                });
-
-                if ([401, 403].includes(error.status)) {
-                    throw error;
-                }
-
-                const retryable =
-                    [500, 502, 503, 504].includes(error.status) ||
-                    error.name === "TimeoutError";
-
-                if (retryable && attempt === 0) {
-                    const delay =
-                        2000 + Math.floor(Math.random() * 1000);
-
-                    await sleep(delay);
-
-                    continue;
-                }
-
-                break;
+            if ([401, 403].includes(error.status)) {
+                throw error;
             }
         }
     }
 
-    throw lastError ||
-        new Error("Gemini request failed.");
+    throw lastError || new Error("Gemini AI is unavailable.");
 }
+
+export default generateGeminiResponse;
