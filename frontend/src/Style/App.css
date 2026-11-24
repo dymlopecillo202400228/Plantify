@@ -1,0 +1,292 @@
+body {
+  margin: 0;
+  background: #f5f8f4;
+  color: #23382d;
+  font-family: "DM Sans", Arial, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.products-page {
+  min-height: calc(100vh - 80px);
+  background: #f5f8f4;
+  padding: 50px 6% 80px;
+  font-family: "DM Sans", Arial, sans-serif;
+}
+
+.products-page .plantify-shop-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto 45px;
+  padding: 20px;
+
+  text-align: center;
+}
+
+.products-page .plantify-shop-heading > * {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.products-page .plantify-shop-label {
+  color: #74947c;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
+.products-page .plantify-shop-heading h1 {
+  color: #24583c;
+  font-size: clamp(34px, 4vw, 46px);
+  font-weight: 800;
+  line-height: 1.2;
+
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
+.products-page .plantify-shop-description {
+  color: #7c8b80;
+  font-size: 16px;
+  line-height: 1.7;
+
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.products-page .product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.products-page .product-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+
+  background: #ffffff;
+  border: 1px solid #e0e9e1;
+  border-radius: 18px;
+
+  box-shadow: 0 8px 25px rgba(26, 61, 37, 0.05);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.products-page .product-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 12px 28px rgba(26, 61, 37, 0.1);
+}
+
+.products-page .product-image {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: #e7f1e8;
+}
+
+.products-page .product-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 220px;
+
+  background: linear-gradient(
+    135deg,
+    #e7f1e8,
+    #d7e8d9
+  );
+
+  color: #24583c;
+  font-size: 70px;
+  font-weight: 800;
+}
+
+.products-page .product-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  padding: 24px;
+}
+
+.products-page .product-category {
+  color: #4c8760;
+  font-size: 12px;
+  font-weight: 700;
+
+  margin: 0 0 12px;
+}
+
+.products-page .product-card h3 {
+  color: #173e2d;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.4;
+
+  margin: 0 0 10px;
+}
+
+.products-page .product-description {
+  color: #7c8b80;
+  font-size: 14px;
+  line-height: 1.6;
+
+  margin: 0 0 18px;
+  min-height: 44px;
+}
+
+.products-page .product-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-top: auto;
+}
+
+.products-page .product-price {
+  color: #24583c;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.products-page .add-to-cart-btn {
+  padding: 13px 20px;
+
+  background: #24583c;
+  color: #ffffff;
+
+  border: none;
+  border-radius: 10px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.products-page .add-to-cart-btn:hover:not(:disabled) {
+  background: #173e2d;
+  transform: translateY(-2px);
+}
+
+.products-page .add-to-cart-btn:disabled {
+  background: #aab9ad;
+  cursor: not-allowed;
+}
+
+.products-page .product-stock {
+  display: block;
+  color: #7c8b80;
+  font-size: 13px;
+
+  margin-top: 14px;
+}
+
+.products-page .shop-status-message {
+  max-width: 1400px;
+  margin: 30px auto;
+  padding: 30px;
+
+  text-align: center;
+  color: #7c8b80;
+  font-size: 16px;
+}
+
+.products-page .shop-error-message {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 18px 22px;
+
+  color: #b42318;
+  background: #fff0ee;
+
+  border: 1px solid #ffc5c0;
+  border-radius: 12px;
+
+  text-align: center;
+}
+
+@media (max-width: 1000px) {
+  .products-page .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .products-page {
+    padding: 30px 16px 60px;
+  }
+
+  .products-page .plantify-shop-heading {
+    padding: 15px 8px;
+    margin-bottom: 28px;
+  }
+
+  .products-page .plantify-shop-heading h1 {
+    font-size: 32px;
+  }
+
+  .products-page .plantify-shop-description {
+    font-size: 14px;
+  }
+
+  .products-page .product-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .products-page .product-image,
+  .products-page .product-placeholder {
+    height: 200px;
+  }
+
+  .products-page .product-info {
+    padding: 20px;
+  }
+
+  .products-page .product-bottom {
+    flex-wrap: wrap;
+  }
+
+  .products-page .product-price {
+    font-size: 21px;
+  }
+}

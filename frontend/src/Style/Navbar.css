@@ -1,0 +1,328 @@
+.plantify-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e0eae0;
+  box-shadow: 0 2px 12px rgba(22, 77, 53, 0.03);
+  font-family: "DM Sans", sans-serif;
+}
+
+.plantify-navbar * {
+  box-sizing: border-box;
+}
+
+.plantify-navbar-container {
+  max-width: 1440px;
+  min-height: 76px;
+  padding: 12px 30px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.plantify-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #164d35;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
+}
+
+.plantify-logo svg {
+  color: #226b43;
+}
+
+.plantify-logo:hover {
+  color: #226b43;
+}
+
+.plantify-nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.plantify-nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  color: #243d30;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+
+  padding: 10px 4px;
+  border-radius: 8px;
+  transition: color 0.2s ease;
+}
+
+.plantify-nav-link:hover {
+  color: #27834e;
+}
+
+.plantify-nav-link.active {
+  color: #27834e;
+}
+
+.plantify-nav-link svg {
+  flex-shrink: 0;
+}
+
+.plantify-profile-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 7px 10px;
+  background: #f1f7f1;
+  border: 1px solid #e0ece0;
+  border-radius: 12px;
+
+  color: #164d35;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.plantify-profile-link:hover {
+  background: #e5f1e5;
+  border-color: #c9dfce;
+}
+
+.plantify-nav-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #dcebdd;
+  color: #226b43;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.plantify-nav-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.plantify-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.plantify-user-name {
+  max-width: 130px;
+  color: #164d35;
+  font-size: 12px;
+  font-weight: 700;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.plantify-user-role {
+  color: #789183;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.plantify-logout-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 12px 17px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  background: #fff0ed;
+  color: #e43c2e;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.plantify-logout-button:hover {
+  background: #ffe0da;
+  border-color: #ffc8be;
+}
+
+.plantify-register-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 12px 20px;
+  border-radius: 10px;
+
+  background: #226b43;
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+
+  transition: 0.2s ease;
+}
+
+.plantify-register-button:hover {
+  background: #174d31;
+  color: #ffffff;
+}
+
+.plantify-mobile-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  background: #edf5ed;
+  color: #226b43;
+
+  border: none;
+  border-radius: 9px;
+
+  cursor: pointer;
+}
+
+.plantify-mobile-toggle:hover {
+  background: #e0eee1;
+}
+
+.plantify-navbar a:focus-visible,
+.plantify-navbar button:focus-visible {
+  outline: 2px solid #27834e;
+  outline-offset: 4px;
+}
+
+@media (max-width: 1100px) {
+  .plantify-navbar-container {
+    padding: 12px 22px;
+  }
+
+  .plantify-nav-menu {
+    gap: 15px;
+  }
+
+  .plantify-user-info {
+    display: none;
+  }
+
+  .plantify-profile-link {
+    padding: 5px;
+    background: transparent;
+    border: none;
+  }
+
+  .plantify-nav-link {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 800px) {
+  .plantify-navbar-container {
+    min-height: 68px;
+    padding: 12px 18px;
+  }
+
+  .plantify-logo {
+    font-size: 22px;
+  }
+
+  .plantify-mobile-toggle {
+    display: flex;
+  }
+
+  .plantify-nav-menu {
+    display: none;
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    padding: 20px;
+
+    background: #ffffff;
+    border-bottom: 1px solid #dce8dd;
+
+    box-shadow: 0 15px 25px
+      rgba(22, 77, 53, 0.08);
+
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .plantify-nav-menu.open {
+    display: flex;
+  }
+
+  .plantify-nav-link {
+    width: 100%;
+    padding: 14px;
+    justify-content: flex-start;
+    font-size: 14px;
+  }
+
+  .plantify-nav-link:hover,
+  .plantify-nav-link.active {
+    background: #edf5ed;
+    color: #226b43;
+  }
+
+  .plantify-profile-link {
+    padding: 12px;
+    background: #f1f7f1;
+    border: 1px solid #dce8dd;
+  }
+
+  .plantify-user-info {
+    display: flex;
+  }
+
+  .plantify-user-name {
+    max-width: 220px;
+    font-size: 13px;
+  }
+
+  .plantify-user-role {
+    font-size: 11px;
+  }
+
+  .plantify-logout-button,
+  .plantify-register-button {
+    width: 100%;
+    padding: 14px;
+    justify-content: center;
+  }
+}

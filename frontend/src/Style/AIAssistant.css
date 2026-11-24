@@ -1,0 +1,351 @@
+.plantify-ai {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  z-index: 1500;
+  font-family: "DM Sans", Arial, sans-serif;
+  color: #173e2c;
+}
+
+.plantify-ai * {
+  box-sizing: border-box;
+}
+
+.plantify-ai .plantify-ai-launcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 62px;
+  height: 62px;
+  margin-left: auto;
+  border: none;
+  border-radius: 50%;
+  background: #236b43;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(35, 107, 67, 0.25);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.plantify-ai .plantify-ai-launcher:hover {
+  background: #174b32;
+  transform: translateY(-3px);
+}
+
+.plantify-ai .plantify-ai-indicator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 21px;
+  height: 21px;
+  background: #a9d9ad;
+  color: #174b32;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plantify-ai .plantify-ai-window {
+  width: 380px;
+  height: 560px;
+  max-height: calc(100dvh - 120px);
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #dce9dc;
+  border-radius: 22px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: 0 15px 50px rgba(23, 62, 44, 0.17);
+  animation: plantify-ai-enter 0.2s ease-out;
+}
+
+@keyframes plantify-ai-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.plantify-ai .plantify-ai-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #236b43;
+  color: #ffffff;
+  padding: 20px 16px;
+  flex-shrink: 0;
+}
+
+.plantify-ai .plantify-ai-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.plantify-ai .plantify-ai-heading {
+  flex: 1;
+}
+
+.plantify-ai .plantify-ai-heading h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 5px;
+  color: #ffffff;
+}
+
+.plantify-ai .plantify-ai-heading p {
+  font-size: 11px;
+  margin: 0;
+  color: #d7ebdc;
+}
+
+.plantify-ai .plantify-ai-close {
+  border: none;
+  background: transparent;
+  color: white;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.plantify-ai .plantify-ai-messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  background: #f5f8f3;
+  padding: 18px 14px;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.plantify-ai .plantify-ai-date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #607c67;
+  font-size: 11px;
+  margin-bottom: 20px;
+}
+
+.plantify-ai .plantify-ai-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 17px;
+}
+
+.plantify-ai .plantify-ai-message.user {
+  justify-content: flex-end;
+}
+
+.plantify-ai .plantify-ai-bot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e1eee1;
+  color: #236b43;
+  border-radius: 50%;
+  width: 31px;
+  height: 31px;
+  flex-shrink: 0;
+}
+
+.plantify-ai .plantify-ai-bubble {
+  max-width: 85%;
+  padding: 12px 15px;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.plantify-ai .assistant .plantify-ai-bubble {
+  background: #ffffff;
+  color: #244b34;
+  border: 1px solid #e3ece2;
+  border-radius: 4px 15px 15px 15px;
+}
+
+.plantify-ai .user .plantify-ai-bubble {
+  background: #236b43;
+  color: #ffffff;
+  border-radius: 15px 4px 15px 15px;
+}
+
+.plantify-ai .plantify-ai-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.plantify-ai .plantify-ai-suggestions p {
+  width: 100%;
+  color: #607c67;
+  font-size: 12px;
+  margin: 0 0 5px;
+}
+
+.plantify-ai .plantify-ai-suggestions button {
+  background: #ffffff;
+  border: 1px solid #cbded0;
+  color: #236b43;
+  border-radius: 20px;
+  padding: 9px 12px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.plantify-ai .plantify-ai-suggestions button:hover {
+  background: #e4f0e3;
+}
+
+.plantify-ai .plantify-ai-form {
+  display: flex;
+  gap: 9px;
+  padding: 14px;
+  background: #ffffff;
+  border-top: 1px solid #e5eee5;
+}
+
+.plantify-ai .plantify-ai-form input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dbe8dc;
+  border-radius: 11px;
+  background: #f6f9f5;
+  color: #173e2c;
+  font-size: 13px;
+  outline: none;
+}
+
+.plantify-ai .plantify-ai-form input:focus {
+  border-color: #236b43;
+}
+
+.plantify-ai .plantify-ai-form button {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #236b43;
+  color: #ffffff;
+  border: none;
+  border-radius: 11px;
+  cursor: pointer;
+}
+
+.plantify-ai .plantify-ai-form button:disabled {
+  background: #a6bbaa;
+  cursor: not-allowed;
+}
+
+.plantify-ai .plantify-ai-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 12px 13px;
+  font-size: 10px;
+  color: #607c67;
+}
+
+.plantify-ai .plantify-ai-typing {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.plantify-ai .plantify-ai-typing span {
+  width: 7px;
+  height: 7px;
+  background: #6c9d7a;
+  border-radius: 50%;
+  animation: plantify-ai-typing 1.2s infinite;
+}
+
+.plantify-ai .plantify-ai-typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.plantify-ai .plantify-ai-typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes plantify-ai-typing {
+  0%, 60%, 100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+.plantify-ai button:focus-visible {
+  outline: 3px solid #83bd91;
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .plantify-ai {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .plantify-ai .plantify-ai-window {
+    width: calc(100vw - 28px);
+    max-width: 380px;
+    height: 540px;
+    max-height: calc(100dvh - 100px);
+    border-radius: 18px;
+    margin-bottom: 12px;
+  }
+
+  .plantify-ai .plantify-ai-launcher {
+    width: 54px;
+    height: 54px;
+  }
+
+  .plantify-ai .plantify-ai-form input {
+    font-size: 16px;
+  }
+
+  .plantify-ai .plantify-ai-header {
+    padding: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plantify-ai .plantify-ai-window,
+  .plantify-ai .plantify-ai-typing span {
+    animation: none;
+  }
+
+  .plantify-ai .plantify-ai-launcher {
+    transition: none;
+  }
+}
