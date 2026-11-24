@@ -1,70 +1,51 @@
 import dotenv from "dotenv";
 
-import {
-  generateGeminiResponse
-} from "./src/services/geminiService.js";
-
 dotenv.config();
 
+const apiKey = process.env.GEMINI_API_KEY?.trim();
+
 async function checkGemini() {
-  console.log("==========================");
-  console.log("TESTING PLANTIFY GEMINI AI");
-  console.log("==========================");
+    try {
+        if (!apiKey) {
+            throw new Error("GEMINI_API_KEY is missing.");
+        }
 
-  if (!process.env.GEMINI_API_KEY) {
-    console.error("API KEY IS MISSING.");
-    return;
-  }
+        const response = await fetch(
+            "https://generativelanguage.googleapis.com/v1beta/models",
+            {
+                headers: {
+                    "x-goog-api-key": apiKey
+                }
+            }
+        );
 
-  console.log("API KEY IS CONFIGURED.");
+        const data = await response.json();
 
-  console.log(
-    "PRIMARY MODEL:",
-    process.env.GEMINI_MODEL
-  );
+        if (!response.ok) {
+            throw new Error(
+                data.error?.message || "Request failed."
+            );
+        }
 
-  console.log(
-    "FALLBACK MODEL:",
-    process.env.GEMINI_FALLBACK_MODEL
-  );
+        const models = (data.models || [])
+            .filter((model) =>
+                model.supportedGenerationMethods?.includes(
+                    "generateContent"
+                )
+            );
 
-  try {
-    const reply = await generateGeminiResponse(
-      "Recommend three beginner-friendly indoor plants."
-    );
+        console.log("GEMINI CONNECTION SUCCESSFUL");
+        console.log("AVAILABLE MODELS:");
 
-    console.log("==========================");
-    console.log("GEMINI IS WORKING!");
-    console.log("==========================");
+        models.forEach((model) => {
+            console.log(
+                model.name.replace(/^models\//, "")
+            );
+        });
 
-    console.log(reply);
-
-  } catch (error) {
-    console.error("==========================");
-    console.error("GEMINI TEST FAILED");
-
-    console.error(
-      "STATUS:",
-      error.status || "Unknown"
-    );
-
-    console.error(
-      "MESSAGE:",
-      error.message
-    );
-
-    console.error("==========================");
-
-    if (error.status === 503) {
-      console.log(
-        "Gemini is temporarily unavailable."
-      );
-
-      console.log(
-        "Please try again later."
-      );
+    } catch (error) {
+        console.error("GEMINI ERROR:", error.message);
     }
-  }
 }
 
 checkGemini();
