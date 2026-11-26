@@ -14,12 +14,10 @@ import api from "../ApiClient/api";
 import "../Style/Product.css";
 
 const formatPrice = (amount) => {
-  return new Intl.NumberFormat("en-PH", {
-    style: "currency",
-    currency: "PHP",
+  return "\u20B1" + Number(amount || 0).toLocaleString("en-PH", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
-  }).format(Number(amount || 0));
+  });
 };
 
 const unwrap = (body) => body?.data ?? body;
@@ -71,12 +69,9 @@ export default function Products() {
 
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-
   const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] =
-    useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortBy, setSortBy] = useState("featured");
-
   const [loading, setLoading] = useState(true);
   const [addingId, setAddingId] = useState(null);
   const [error, setError] = useState("");
@@ -316,13 +311,18 @@ export default function Products() {
             >
               <option value="featured">Featured</option>
               <option value="newest">Newest</option>
+
               <option value="price-low">
                 Price: Low to High
               </option>
+
               <option value="price-high">
                 Price: High to Low
               </option>
-              <option value="name">Name: A to Z</option>
+
+              <option value="name">
+                Name: A to Z
+              </option>
             </select>
           </div>
         </div>

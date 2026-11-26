@@ -22,9 +22,15 @@ const initialForm = {
   postalCode: ""
 };
 
+const formatPrice = (amount) => {
+  return "\u20B1" + Number(amount || 0).toLocaleString("en-PH", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+};
+
 export default function Checkout() {
   const [form, setForm] = useState(initialForm);
-
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState(false);
@@ -109,15 +115,6 @@ export default function Checkout() {
     );
   }, 0);
 
-  const formatPrice = (amount) => {
-    return new Intl.NumberFormat("en-PH", {
-      style: "currency",
-      currency: "PHP",
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(Number(amount || 0));
-  };
-
   const handleCheckout = async (e) => {
     e.preventDefault();
 
@@ -140,9 +137,7 @@ export default function Checkout() {
       postalCode: form.postalCode.trim()
     };
 
-    for (const [field, value] of Object.entries(
-      customer
-    )) {
+    for (const [field, value] of Object.entries(customer)) {
       if (!value) {
         setError(`${field} is required.`);
         return;
@@ -153,8 +148,7 @@ export default function Checkout() {
       const product = getProduct(item);
 
       return {
-        product_id:
-          item.product_id || product?.id,
+        product_id: item.product_id || product?.id,
         quantity: getQuantity(item)
       };
     });
@@ -307,7 +301,6 @@ export default function Checkout() {
           onSubmit={handleCheckout}
           className="checkout-layout"
         >
-
           <section className="checkout-card">
             <h2>
               <MapPin size={25} />
@@ -369,8 +362,7 @@ export default function Checkout() {
                     >
                       <div>
                         <strong>
-                          {product?.name ||
-                            "Product"}
+                          {product?.name || "Product"}
                         </strong>
 
                         <p>
