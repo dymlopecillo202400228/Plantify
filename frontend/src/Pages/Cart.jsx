@@ -5,10 +5,12 @@ import api from "../ApiClient/api";
 import "../Style/Cart.css";
 
 const formatPrice = (amount) => {
-  return `â‚±${Number(amount || 0).toLocaleString("en-PH", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })}`;
+    return new Intl.NumberFormat("en-PH", {
+        style: "currency",
+        currency: "PHP",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(Number(amount || 0));
 };
 
 const extractItems = (body) => {
