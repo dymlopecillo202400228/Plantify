@@ -1,6 +1,14 @@
 ﻿import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {ArrowLeft,ArrowRight,MapPin,ShoppingBag,CreditCard,Package,ShieldCheck,} from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  MapPin,
+  ShoppingBag,
+  CreditCard,
+  Package,
+  ShieldCheck
+} from "lucide-react";
 import api from "../ApiClient/api";
 import "../Style/Checkout.css";
 
@@ -11,7 +19,7 @@ const initialForm = {
   address: "",
   city: "",
   province: "",
-  postalCode: "",
+  postalCode: ""
 };
 
 export default function Checkout() {
@@ -53,7 +61,7 @@ export default function Checkout() {
         if (active) {
           setError(
             err.response?.data?.message ||
-              "Unable to load your cart. Please check your login session."
+            "Unable to load your cart. Please check your login session."
           );
         }
       } finally {
@@ -75,7 +83,7 @@ export default function Checkout() {
 
     setForm((previous) => ({
       ...previous,
-      [name]: value,
+      [name]: value
     }));
 
     setError("");
@@ -102,13 +110,12 @@ export default function Checkout() {
   }, 0);
 
   const formatPrice = (amount) => {
-    return `â‚±${Number(amount || 0).toLocaleString(
-      "en-PH",
-      {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }
-    )}`;
+    return new Intl.NumberFormat("en-PH", {
+      style: "currency",
+      currency: "PHP",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(Number(amount || 0));
   };
 
   const handleCheckout = async (e) => {
@@ -130,7 +137,7 @@ export default function Checkout() {
       address: form.address.trim(),
       city: form.city.trim(),
       province: form.province.trim(),
-      postalCode: form.postalCode.trim(),
+      postalCode: form.postalCode.trim()
     };
 
     for (const [field, value] of Object.entries(
@@ -148,7 +155,7 @@ export default function Checkout() {
       return {
         product_id:
           item.product_id || product?.id,
-        quantity: getQuantity(item),
+        quantity: getQuantity(item)
       };
     });
 
@@ -174,7 +181,7 @@ export default function Checkout() {
         "/payments/checkout",
         {
           customer,
-          items,
+          items
         }
       );
 
@@ -214,8 +221,8 @@ export default function Checkout() {
       } else {
         setError(
           err.response?.data?.message ||
-            err.message ||
-            "Unable to continue to Maya Payment."
+          err.message ||
+          "Unable to continue to Maya Payment."
         );
       }
     } finally {
@@ -229,50 +236,50 @@ export default function Checkout() {
       label: "Full Name",
       type: "text",
       placeholder: "Enter your full name",
-      autoComplete: "name",
+      autoComplete: "name"
     },
     {
       name: "email",
       label: "Email Address",
       type: "email",
       placeholder: "example@email.com",
-      autoComplete: "email",
+      autoComplete: "email"
     },
     {
       name: "phone",
       label: "Phone Number",
       type: "tel",
       placeholder: "09XXXXXXXXX",
-      autoComplete: "tel",
+      autoComplete: "tel"
     },
     {
       name: "address",
       label: "Complete Address",
       type: "text",
       placeholder: "House, Street, Barangay",
-      autoComplete: "street-address",
+      autoComplete: "street-address"
     },
     {
       name: "city",
       label: "City",
       type: "text",
       placeholder: "Enter city",
-      autoComplete: "address-level2",
+      autoComplete: "address-level2"
     },
     {
       name: "province",
       label: "Province",
       type: "text",
       placeholder: "Enter province",
-      autoComplete: "address-level1",
+      autoComplete: "address-level1"
     },
     {
       name: "postalCode",
       label: "Postal Code",
       type: "text",
       placeholder: "9200",
-      autoComplete: "postal-code",
-    },
+      autoComplete: "postal-code"
+    }
   ];
 
   return (
@@ -375,7 +382,7 @@ export default function Checkout() {
                       <strong>
                         {formatPrice(
                           getPrice(item) *
-                            getQuantity(item)
+                          getQuantity(item)
                         )}
                       </strong>
                     </div>

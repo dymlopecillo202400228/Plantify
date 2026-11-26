@@ -4,11 +4,14 @@ import {Search,ShoppingCart,Package,SlidersHorizontal,CheckCircle2,AlertCircle,L
 import api from "../ApiClient/api";
 import "../Style/Product.css";
 
-const money = (value) =>
-  `â‚±${Number(value || 0).toLocaleString("en-PH", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })}`;
+const formatPrice = (amount) => {
+    return new Intl.NumberFormat("en-PH", {
+        style: "currency",
+        currency: "PHP",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(Number(amount || 0));
+};
 
 const unwrap = (body) => body?.data ?? body;
 
