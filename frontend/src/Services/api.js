@@ -19,19 +19,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
     (config) => {
-        let token = localStorage.getItem("plantify_token");
-
-        if (!token) {
-            try {
-                const session = JSON.parse(
-                    localStorage.getItem("plantify_session") || "null"
-                );
-
-                token = session?.access_token;
-            } catch {
-                token = null;
-            }
-        }
+        const token = localStorage.getItem("token");
 
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
@@ -55,7 +43,40 @@ api.interceptors.response.use(
     },
 
     (error) => {
-        if (error.code === "ECONNABORTED") {
+        const status = error.response?.status;
+        const requestUrl = error.config?.url || "";
+
+        const isAuthRequest =
+            requestUrl.includes("/auth/login") ||
+            requestUrl.includes("/auth/register");
+
+        const requestToken =
+            error.config?.headers?.Authorization;
+
+        const currentToken =
+            localStorage.getItem("token");
+
+        if (
+            status === 401 &&
+            !isAuthRequest &&
+            currentToken &&
+            requestToken === `Bearer ${currentToken}`
+        ) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            localStorage.removeItem("plantify_token");
+            localStorage.removeItem("plantify_user");
+            localStorage.removeItem("plantify_session");
+
+            window.dispatchEvent(
+                new Event("plantify:session-expired")
+            );
+        }
+
+        if (
+            error.code === "ECONNABORTED" ||
+            error.code === "ETIMEDOUT"
+        ) {
             console.error("API request timed out.");
         } else {
             console.error(

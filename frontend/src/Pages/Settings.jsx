@@ -1,21 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  User,
-  Camera,
-  Mail,
-  Phone,
-  MapPin,
-  LockKeyhole,
-  ShieldCheck,
-  Eye,
-  EyeOff,
-  Save,
-  CheckCircle,
-  AlertCircle,
-  LoaderCircle
-} from "lucide-react";
-
-import api from "../Services/api";
+import {User,Camera,Mail,Phone,MapPin,LockKeyhole,ShieldCheck, Eye,EyeOff,Save,CheckCircle,AlertCircle,LoaderCircle} from "lucide-react";
+import api from "../services/api";
 import "../Style/Settings.css";
 
 export default function Settings() {
@@ -319,17 +304,12 @@ export default function Settings() {
                 )}
 
               </div>
-
               <h3>
                 {profile.full_name || "Plantify Customer"}
               </h3>
-
               <p>{profile.email}</p>
-
             </div>
-
             <div className="settings-menu">
-
               <button
                 className={
                   activeTab === "profile" ? "active" : ""
@@ -339,7 +319,6 @@ export default function Settings() {
                 <User size={19} />
                 My Profile
               </button>
-
               <button
                 className={
                   activeTab === "address" ? "active" : ""
@@ -349,7 +328,6 @@ export default function Settings() {
                 <MapPin size={19} />
                 Delivery Address
               </button>
-
               <button
                 className={
                   activeTab === "password" ? "active" : ""
@@ -369,13 +347,9 @@ export default function Settings() {
                 <ShieldCheck size={19} />
                 Account Security
               </button>
-
             </div>
-
           </aside>
-
           <main className="settings-content">
-
             {message && (
               <div
                 className="settings-success"
@@ -385,7 +359,6 @@ export default function Settings() {
                 {message}
               </div>
             )}
-
             {error && (
               <div
                 className="settings-error"
@@ -407,7 +380,6 @@ export default function Settings() {
                     <p>Update your personal details.</p>
                   </div>
                 </div>
-
                 <div className="settings-photo-section">
 
                   <div className="settings-large-avatar">
@@ -425,7 +397,6 @@ export default function Settings() {
 
                   <div>
                     <h3>Profile Picture</h3>
-
                     <p>
                       JPG, PNG or WEBP. Maximum 5MB.
                     </p>
@@ -702,9 +673,7 @@ export default function Settings() {
                             : <Eye size={18} />}
                         </button>
                       </div>
-
                     </div>
-
                     <div className="settings-field">
 
                       <label htmlFor="newPassword">
@@ -730,15 +699,11 @@ export default function Settings() {
                           required
                         />
                       </div>
-
                     </div>
-
                     <div className="settings-field">
-
                       <label htmlFor="confirmPassword">
                         Confirm New Password
                       </label>
-
                       <div className="settings-input">
                         <LockKeyhole size={18} />
 
@@ -757,15 +722,11 @@ export default function Settings() {
                           required
                         />
                       </div>
-
                     </div>
-
                     <div className="settings-password-note">
                       <ShieldCheck size={22} />
-
                       <div>
                         <strong>Password Requirements</strong>
-
                         <p>
                           Use at least 8 characters and choose
                           a password you do not use on other
@@ -773,9 +734,7 @@ export default function Settings() {
                         </p>
                       </div>
                     </div>
-
                   </div>
-
                   <div className="settings-actions">
                     <button
                       type="submit"
@@ -789,80 +748,60 @@ export default function Settings() {
                         : "Update Password"}
                     </button>
                   </div>
-
                 </form>
-
               </div>
             )}
 
             {activeTab === "security" && (
               <div className="settings-card">
-
                 <div className="settings-card-header">
                   <ShieldCheck size={24} />
-
                   <div>
                     <h2>Account Security</h2>
-
                     <p>
                       Manage your account protection.
                     </p>
                   </div>
                 </div>
-
                 <div className="settings-security-item">
-
                   <div className="settings-security-icon">
                     <Mail size={24} />
                   </div>
-
                   <div>
                     <h3>Registered Email</h3>
                     <p>{profile.email}</p>
                   </div>
-
                 </div>
-
                 <div className="settings-security-item">
 
                   <div className="settings-security-icon">
                     <LockKeyhole size={24} />
                   </div>
-
                   <div>
                     <h3>Account Password</h3>
                     <p>Update your login credentials.</p>
                   </div>
-
                   <button
                     className="settings-outline-button"
                     onClick={() => changeTab("password")}
                   >
                     Change
                   </button>
-
                 </div>
-
                 <div className="settings-password-note">
                   <ShieldCheck size={24} />
-
                   <div>
                     <strong>Security Reminder</strong>
-
                     <p>
                       Never share your password or payment
                       information with anyone.
                     </p>
                   </div>
                 </div>
-
               </div>
             )}
-
           </main>
-
         </div>
-
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {ArrowLeft,ArrowRight,MapPin,ShoppingBag,CreditCard,Package,ShieldCheck,} from "lucide-react";
-import api from "../Services/api";
+import api from "../services/api";
 import "../Style/Checkout.css";
 
 const initialForm = {

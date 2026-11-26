@@ -1,7 +1,7 @@
 import {useState,useEffect,useCallback, useMemo} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {Leaf,ArrowLeft,ArrowRight,Plus,Minus,Trash2,ShieldCheck,ShoppingCart,AlertCircle,Loader2, Package} from "lucide-react";
-import api from "../Services/api";
+import api from "../services/api";
 import "../Style/Cart.css";
 
 const formatPrice = (amount) => {
