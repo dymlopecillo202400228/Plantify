@@ -1,16 +1,25 @@
 ﻿import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {Search,ShoppingCart,Package,SlidersHorizontal,CheckCircle2,AlertCircle,Loader2,Leaf} from "lucide-react";
+import {
+  Search,
+  ShoppingCart,
+  Package,
+  SlidersHorizontal,
+  CheckCircle2,
+  AlertCircle,
+  Loader2,
+  Leaf
+} from "lucide-react";
 import api from "../ApiClient/api";
 import "../Style/Product.css";
 
 const formatPrice = (amount) => {
-    return new Intl.NumberFormat("en-PH", {
-        style: "currency",
-        currency: "PHP",
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    }).format(Number(amount || 0));
+  return new Intl.NumberFormat("en-PH", {
+    style: "currency",
+    currency: "PHP",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(Number(amount || 0));
 };
 
 const unwrap = (body) => body?.data ?? body;
@@ -188,7 +197,13 @@ export default function Products() {
     }
 
     return result;
-  }, [products, categories, search, selectedCategory, sortBy]);
+  }, [
+    products,
+    categories,
+    search,
+    selectedCategory,
+    sortBy
+  ]);
 
   const handleAddToCart = async (product) => {
     setError("");
@@ -259,14 +274,20 @@ export default function Products() {
         </div>
 
         {error && (
-          <div className="shop-message shop-error" role="alert">
+          <div
+            className="shop-message shop-error"
+            role="alert"
+          >
             <AlertCircle size={18} />
             {error}
           </div>
         )}
 
         {notice && (
-          <div className="shop-message shop-success" role="status">
+          <div
+            className="shop-message shop-success"
+            role="status"
+          >
             <CheckCircle2 size={18} />
             <span>{notice}</span>
             <Link to="/cart">View Cart</Link>
@@ -295,8 +316,12 @@ export default function Products() {
             >
               <option value="featured">Featured</option>
               <option value="newest">Newest</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
+              <option value="price-low">
+                Price: Low to High
+              </option>
+              <option value="price-high">
+                Price: High to Low
+              </option>
               <option value="name">Name: A to Z</option>
             </select>
           </div>
@@ -403,7 +428,7 @@ export default function Products() {
                         <small>PRICE</small>
 
                         <div className="product-price">
-                          {money(product.price)}
+                          {formatPrice(product.price)}
                         </div>
                       </div>
 
