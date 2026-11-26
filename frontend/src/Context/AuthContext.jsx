@@ -1,4 +1,4 @@
-import {
+﻿import {
     createContext,
     useContext,
     useState,
@@ -7,7 +7,7 @@ import {
     useMemo
 } from "react";
 
-import api from "../Services/api";
+import api from "../ApiClient/api";
 
 const AuthContext = createContext(null);
 

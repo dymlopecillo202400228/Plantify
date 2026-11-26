@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {ArrowLeft,ArrowRight,MapPin,ShoppingBag,CreditCard,Package,ShieldCheck,} from "lucide-react";
-import api from "../Services/api";
+import api from "../ApiClient/api";
 import "../Style/Checkout.css";
 
 const initialForm = {
@@ -102,7 +102,7 @@ export default function Checkout() {
   }, 0);
 
   const formatPrice = (amount) => {
-    return `₱${Number(amount || 0).toLocaleString(
+    return `â‚±${Number(amount || 0).toLocaleString(
       "en-PH",
       {
         minimumFractionDigits: 2,

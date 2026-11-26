@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import api from "../Services/api";
+import api from "../ApiClient/api";
 
 function AdminProducts() {
   const initialForm = {
@@ -209,7 +209,7 @@ function AdminProducts() {
             </div>
 
             <div>
-              <label>Price (₱) *</label>
+              <label>Price (â‚±) *</label>
               <input
                 type="number"
                 name="price"
@@ -325,7 +325,7 @@ function AdminProducts() {
                     <td>{product.name}</td>
 
                     <td>
-                      ₱{Number(product.price || 0).toFixed(2)}
+                      â‚±{Number(product.price || 0).toFixed(2)}
                     </td>
 
                     <td>

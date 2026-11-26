@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {Search,ShoppingCart,Package,SlidersHorizontal,CheckCircle2,AlertCircle,Loader2,Leaf} from "lucide-react";
-import api from "../Services/api";
+import api from "../ApiClient/api";
 import "../Style/Product.css";
 
 const money = (value) =>
-  `₱${Number(value || 0).toLocaleString("en-PH", {
+  `â‚±${Number(value || 0).toLocaleString("en-PH", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   })}`;

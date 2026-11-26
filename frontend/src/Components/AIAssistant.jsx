@@ -1,6 +1,6 @@
-import {useState,useRef,useEffect} from "react";
+﻿import {useState,useRef,useEffect} from "react";
 import {Bot,Sprout,X,Send,Sparkles,MessageCircle} from "lucide-react";
-import api from "../Services/api";
+import api from "../ApiClient/api";
 import "../Style/AIAssistant.css";
 export default function AIAssistant() {
 
@@ -11,7 +11,7 @@ export default function AIAssistant() {
     {
       role: "assistant",
       text:
-        "Hello! 🌱 Welcome to Plantify. I'm your AI gardening assistant. How can I help you today?"
+        "Hello! ðŸŒ± Welcome to Plantify. I'm your AI gardening assistant. How can I help you today?"
     }
   ]);
 
@@ -21,7 +21,7 @@ export default function AIAssistant() {
 
   const suggestions = [
     "Best plants for beginners",
-    "Plants under ₱500",
+    "Plants under â‚±500",
     "Indoor plant recommendations",
     "How to care for succulents?"
   ];
@@ -234,7 +234,7 @@ export default function AIAssistant() {
 
           <div className="plantify-ai-footer">
             <Sparkles size={12} />
-            Powered by AI · Plantify
+            Powered by AI Â· Plantify
           </div>
 
         </section>

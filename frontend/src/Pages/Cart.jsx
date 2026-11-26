@@ -1,11 +1,11 @@
-import {useState,useEffect,useCallback, useMemo} from "react";
+﻿import {useState,useEffect,useCallback, useMemo} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {Leaf,ArrowLeft,ArrowRight,Plus,Minus,Trash2,ShieldCheck,ShoppingCart,AlertCircle,Loader2, Package} from "lucide-react";
-import api from "../Services/api";
+import api from "../ApiClient/api";
 import "../Style/Cart.css";
 
 const formatPrice = (amount) => {
-  return `₱${Number(amount || 0).toLocaleString("en-PH", {
+  return `â‚±${Number(amount || 0).toLocaleString("en-PH", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   })}`;
@@ -255,7 +255,7 @@ function Cart() {
                           />
                         ) : (
                           <span style={{ fontSize: "45px" }}>
-                            🌱
+                            ðŸŒ±
                           </span>
                         )}
                       </div>
