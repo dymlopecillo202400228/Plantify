@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {CheckCircle,Clock,Package} from "lucide-react";
-import api from "../services/api";
+import api from "../Services/api";
 
 export default function PaymentSuccess() {
   const [order, setOrder] = useState(null);

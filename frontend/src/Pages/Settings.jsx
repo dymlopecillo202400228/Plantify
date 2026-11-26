@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {User,Camera,Mail,Phone,MapPin,LockKeyhole,ShieldCheck, Eye,EyeOff,Save,CheckCircle,AlertCircle,LoaderCircle} from "lucide-react";
-import api from "../services/api";
+import api from "../Services/api";
 import "../Style/Settings.css";
 
 export default function Settings() {

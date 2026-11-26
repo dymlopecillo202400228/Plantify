@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {Search,ShoppingCart,Package,SlidersHorizontal,CheckCircle2,AlertCircle,Loader2,Leaf} from "lucide-react";
-import api from "../services/api";
+import api from "../Services/api";
 import "../Style/Product.css";
 
 const money = (value) =>

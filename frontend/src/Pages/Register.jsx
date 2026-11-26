@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {Leaf,UserRound,Mail,LockKeyhole,Eye,EyeOff,ArrowRight,CheckCircle2,AlertCircle,ShieldCheck} from "lucide-react";
-import api from "../services/api";
+import api from "../Services/api";
 import "../Style/Register.css";
 
 export default function Register() {
